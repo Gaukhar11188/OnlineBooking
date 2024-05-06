@@ -1,0 +1,88 @@
+﻿@model List<RoomBookingProject.Models.Booking>
+
+@{
+    ViewData["Title"] = "Booking Confirmation";
+    ViewData["Room"] = "active";
+
+}
+
+<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Booking Confirmation</h2>
+                    <div class="bt-option">
+                        <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <span>Booking Confirmation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section End -->
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="theader">Booking Id</th>
+                            <th class="theader">Room</th>
+                            <th class="theader">CheckInDate</th>
+                            <th class="theader">CheckOutDate</th>
+                            <th class="theader">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var booking in Model)
+                        {
+                            if (booking.CustomerId == ViewBag.CustomerId)
+                            {
+                                <tr>
+                                    <td class="theader">@booking.BookingId</td>
+                                    <td class="theader">@booking.Room.RoomType</td>
+                                    <td class="theader">@booking.CheckInDate</td>
+                                    <td class="theader">@booking.CheckOutDate</td>
+                                    <td class="theader">@booking.Status</td>
+                                   
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <p>
+            <strong>IMPORTANT NOTICE:</strong> We're excited to confirm your reservation with us! 
+            <br /> As you plan your stay, we wanted to share some important details to ensure a smooth and enjoyable experience.
+            </br>
+            Check-in and Check-out Times:
+            </br>
+            - Check-in time: 14:00 (2:00 PM)
+            </br>
+            - Check-out time: 12:00 PM
+            </br>
+            Please keep these times in mind when planning your arrival and departure. Should you need to make any adjustments, please don't hesitate to contact us.
+
+            </br>
+            <strong>Reservation Hold:</strong>
+            </br>
+            Your reservation is currently held without a deposit.
+            We kindly request that you confirm your reservation by making a deposit within 10 days of the reservation date.
+            Failure to make a deposit within this timeframe may result in the cancellation of your booking.
+            Should you have any questions or require further assistance, feel free to reach out to our team. We're here to help make your stay memorable.
+            </br>
+            We look forward to welcoming you soon!
+        </p>
+    </div>
+</div>

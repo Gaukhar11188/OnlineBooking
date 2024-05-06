@@ -1,0 +1,180 @@
+﻿@model RoomBookingProject.Models.Room
+
+@{
+    ViewData["Title"] = "Room Details";
+    ViewData["Room"] = "active";
+
+    var pricePerNight = Model.PricePerNight;
+    var checkInDate = ViewBag.CheckInDate;
+    var checkOutDate = ViewBag.CheckOutDate;
+
+    var jsCheckInDate = checkInDate.ToString("yyyy-MM-dd");
+    var jsCheckOutDate = checkOutDate.ToString("yyyy-MM-dd");
+
+    var duration = (checkOutDate.Date - checkInDate.Date).TotalDays;
+
+    var total = pricePerNight * (decimal)duration;
+}
+
+<body>
+<!-- Breadcrumb Section Begin -->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>Room Details</h2>
+                        <div class="bt-option">
+                            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <span>Room Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Room Details Section Begin -->
+    <section class="room-details-section spad">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="room-details-item">
+                        
+                        <img src="/img/room/@Model.Img" alt="">
+                        <div class="rd-text">
+                            <div class="rd-title">
+                                <h3>@Model.RoomType</h3>
+                                
+                            </div>
+                            <h2 value="@Model.PricePerNight">@Model.PricePerNight$<span>/Pernight</span></h2>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">Capacity:</td>
+                                        <td>Max persion @Model.Capacity</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Description:</td>
+                                        <td>@Model.Description</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="f-para">
+                                Our hotel offers cozy and stylish rooms equipped with all the essentials for a comfortable stay. 
+                                Our services include daily housekeeping, 24-hour reception, and the option to order breakfast to your room. 
+                                Guests also have access to amenities such as complimentary Wi-Fi, a fitness center, and a restaurant with a diverse menu. 
+                                With our attentive service and conveniences, your stay with us will be pleasant and memorable.
+
+                            </p>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-6">
+                    </br>
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert @((TempData["IsError"] != null && (bool)TempData["IsError"]) ? "alert-danger" : "alert-success")" role="alert">
+                            @TempData["Message"]
+                        </div>
+                    }
+                    </br>
+
+                    <div class="room-booking">
+                        <h3>Your Reservation</h3>
+                        <form asp-controller="Home" asp-action="RoomDetails" method="post">
+                            <input type="hidden" name="checkInDate" value="@ViewBag.CheckInDate" />
+                            <input type="hidden" name="checkOutDate" value="@ViewBag.CheckOutDate" />
+                            <input type="hidden" name="RoomId" asp-for="@Model.RoomId" />
+
+                        
+                            <div class="check-date">
+                                <label for="Name">Customer name:</label>
+                                <input type="text" id="Name" name="Name" value="@ViewBag.UserName">
+                            </div>
+
+                            <div class="check-date">
+                                <label for="Phone">Phone number:</label>
+                                <input type="text" id="Phone" name="Phone" value="@ViewBag.UserPhone">
+                            </div>
+
+                            <div class="check-date">
+                                <label for="date-in">Check In:</label>
+                                <input type="text"  id="date-in" name="checkInDateDisplay" value="@ViewBag.CheckInDate" readonly>
+                                <i class="icon_calendar"></i>
+                            </div>
+                            <div class="check-date">
+                                <label for="date-out">Check Out:</label>
+                                <input type="text" id="date-out" name="checkOutDateDisplay" value="@ViewBag.CheckOutDate" readonly>
+                                <i class="icon_calendar"></i>
+                            </div>
+                            <div class="select-option">
+                                <label for="guest">Capacity:</label>
+                                <select id="guest" name="guests">
+                                    <option value="@Model.Capacity">@Model.Capacity Adult(s)</option>
+                                </select>
+                            </div>
+                            <div id="total-price" data-price="@Model.PricePerNight"><h3>Total price: @total$</h3></div>
+                            <button type="submit">Book Now</button>
+                            </br>
+                            </br>
+
+
+
+                        </form>
+
+
+                    </div>
+                </div>
+ 
+            </div>
+        </div>
+    </section>
+    <!-- Room Details Section End -->
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+      
+        var token = $('input[name="__RequestVerificationToken"]').val();
+
+        function updateTotalPrice() {
+            var checkInDate = $('#date-in').val();
+            var checkOutDate = $('#date-out').val();
+
+       
+            if (new Date(checkInDate) >= new Date(checkOutDate)) {
+                $('#total-price').text('Total price: 0$');
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("CalculateTotalPrice", "Home")',
+                type: 'POST',
+                data: {
+                    checkInDate: checkInDate,
+                    checkOutDate: checkOutDate,
+                    pricePerNight: parseFloat($('#total-price').attr('data-price')),
+                    
+                    __RequestVerificationToken: token
+                },
+                success: function (data) {
+                    $('#total-price').text('Total price: ' + data + '$');
+                }
+            });
+        }
+
+        $('#date-in, #date-out').change(function () {
+            updateTotalPrice();
+        });
+    });
+
+</script>

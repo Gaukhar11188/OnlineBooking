@@ -1,0 +1,59 @@
+﻿@model RoomBookingProject.Models.Blog
+
+@{
+    ViewData["Title"] = "Create Blog";
+    ViewData["AdminPanel"] = "active";
+}
+
+<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Create Blog</h2>
+                    <div class="bt-option">
+                        <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <span>Create Blog</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section End -->
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <form asp-action="CreateBlog" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Description"><strong>Description: </strong></label>
+                <input asp-for="Description" placeholder="Enter description" class="form-control"/>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateDate"><strong>Date of event: </strong></label>
+                <input asp-for="CreateDate" placeholder="Enter date" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <strong><label asp-for="Img"></label></strong>
+                <input type="file" name="ImgFile" class="form-control-file" accept="image/*">
+                <span asp-validation-for="Img" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <strong>
+                    <label asp-for="Img"></label>
+                </strong>
+                <input asp-for="Img" class="form-control" placeholder="Enter image name (example: blog-1.jpg or blog-1.png, etc.)" />
+                <span asp-validation-for="Img" class="text-danger"></span>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-action="ViewBlog" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+        </br>
+        </br>
+    </div>
+</div>

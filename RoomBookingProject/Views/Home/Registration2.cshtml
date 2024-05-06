@@ -1,0 +1,61 @@
+﻿@model RoomBookingProject.Models.User
+
+@{
+    ViewData["Title"] = "Registration page";
+    ViewData["Registration"] = "active";
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Sign Up</h2>
+                    <div class="bt-option">
+                        <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <span>Sign Up</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Breadcrumb Section End -->
+
+<div class="col-lg-5" style="margin: 0 auto;">
+    <div class="room-booking">
+        <h4 class="aheader" style="color: #dfa974;">Please Sign Up or <a class="text-dark" asp-controller="Home" asp-action="Registration">Sign In</a> to account </h4>
+        </br>
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert @((TempData["IsError"] != null && (bool)TempData["IsError"]) ? "alert-danger" : "alert-success")" role="alert">
+                @TempData["Message"]
+            </div>
+        }
+        </br>
+        <form asp-action="Registration2" method="post" class="needs-validation" novalidate>
+            <div class="check-date">
+                <label asp-for="Email" class="form-label">Email:</label>
+                <input asp-for="Email" type="email" class="form-control" id="Email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="check-date">
+                <label asp-for="Password" class="form-label">Password:</label>
+                <input asp-for="Password" type="password" class="form-control">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <button type="submit">Sign up</button>
+        </form>
+    </div>
+   
+</div>
+
+ </br>
+    </br>

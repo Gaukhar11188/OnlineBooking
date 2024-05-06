@@ -1,0 +1,136 @@
+﻿@using System.Security.Claims
+@{
+    var userEmailClaim = Context.User.FindFirst("Email");
+    var userEmail = userEmailClaim != null ? userEmailClaim.Value : "Unknown";
+}
+
+<!-- Offcanvas Menu Section Begin -->
+<div class="offcanvas-menu-overlay"></div>
+<div class="canvas-open">
+    <strong><i class="icon_menu"></i></strong>
+</div>
+<div class="offcanvas-menu-wrapper">
+    <div class="canvas-close">
+        <strong><i class="icon_close"></i></strong>
+    </div>
+
+    <div class="header-configure-area">
+        <a asp-controller="Home" asp-action="Room" class="bk-btn">Booking Now</a>
+    </div>
+    <nav class="mainmenu mobile-menu">
+        <ul>
+            @if (User.Identity.IsAuthenticated)
+            {
+
+                <li class="@ViewData["Index"]"><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="@ViewData["About"]"><a class="text-dark" asp-controller="Home" asp-action="About">About Us</a></li>
+                <li class="@ViewData["Room"]"><a class="text-dark" asp-controller="Home" asp-action="RoomInfo">Rooms</a></li>
+                <li class="@ViewData["Contact"]"><a class="text-dark" asp-controller="Home" asp-action="Contact">Contact Us</a></li>
+                
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class=@ViewData["AdminPanel"]>
+                        <a class="text-dark">Administrative Section</a>
+                        <ul class="dropdown">
+                            <li><a class="text-dark" id="unique" asp-controller="Room" asp-action="ViewRoom">Rooms</a></li>
+                            <li><a class="text-dark" id="unique" asp-controller="Customer" asp-action="ViewCustomer">Customers</a></li>
+                            <li><a class="text-dark" id="unique" asp-controller="Booking" asp-action="ViewBooking">Bookings</a></li>
+                            <li><a class="text-dark" id="unique" asp-controller="Blog" asp-action="ViewBlog">Blogs</a></li>
+                        </ul>
+                    </li>
+                }
+                <li class="@ViewData["Logout"]">
+                    <a class="text-dark" asp-controller="Home" asp-action="Logout">Sign Out</a>
+                </li>
+            }
+            else
+            {
+                <li class="@ViewData["Index"]">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li class="@ViewData["About"]"><a class="text-dark" asp-controller="Home" asp-action="About">About Us</a></li>
+                <li class="@ViewData["Room"]"><a class="text-dark" asp-controller="Home" asp-action="RoomInfo">Rooms</a></li>
+                <li class="@ViewData["Contact"]"><a class="text-dark" asp-controller="Home" asp-action="Contact">Contact Us</a></li>
+                <li class="@ViewData["Registration"]"><a class="text-dark" asp-controller="Home" asp-action="Registration">Sign In</a></li>
+            }
+
+        </ul>
+    </nav>
+    <div id="mobile-menu-wrap"></div>
+    <div class="top-social">
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-tripadvisor"></i></a>
+        <a href="#"><i class="fa fa-instagram"></i></a>
+    </div>
+    <ul class="top-widget">
+        <li><i class="fa fa-phone"></i>(+7) 777 777 77-77</li>
+        <li><i class="fa fa-envelope"></i>info@oasis.com</li>
+    </ul>
+</div>
+<!-- Offcanvas Menu Section End -->
+
+<header class="header-section header-normal">
+    <div class="menu-item">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="logo">
+                        <h2>
+                            Hotel<strong><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Oasis</a></strong>
+
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="nav-menu">
+                        <nav class="mainmenu">
+                            <ul>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+
+                                    <li class="@ViewData["Index"]"><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                                    <li class="@ViewData["About"]"><a class="text-dark" asp-controller="Home" asp-action="About">About Us</a></li>
+                                    <li class="@ViewData["Room"]"><a class="text-dark" asp-controller="Home" asp-action="RoomInfo">Rooms</a></li>
+                                    <li class="@ViewData["Contact"]"><a class="text-dark" asp-controller="Home" asp-action="Contact">Contact Us</a></li>
+                                    
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li class=@ViewData["AdminPanel"]>
+                                            <a class="text-dark">Administrative Section <i class="fa fa-caret-down"></i></a>
+                                            <ul class="dropdown">
+                                                <li><a class="text-dark" id="unique" asp-controller="Room" asp-action="ViewRoom">Rooms</a></li>
+                                                <li><a class="text-dark" id="unique"  asp-controller="Customer" asp-action="ViewCustomer">Customers</a></li>
+                                                <li><a class="text-dark" id="unique" asp-controller="Booking" asp-action="ViewBooking">Bookings</a></li>
+                                                <li><a class="text-dark" id="unique" asp-controller="Blog" asp-action="ViewBlog">Blogs</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                    <li class="@ViewData["Logout"]">
+                                        <a class="text-dark" asp-controller="Home" asp-action="Logout">Sign Out</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="@ViewData["Index"]">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                    </li>
+                                    <li class="@ViewData["About"]"><a class="text-dark" asp-controller="Home" asp-action="About">About Us</a></li>
+                                    <li class="@ViewData["Room"]"><a class="text-dark" asp-controller="Home" asp-action="RoomInfo">Rooms</a></li>
+                                    <li class="@ViewData["Contact"]"><a class="text-dark" asp-controller="Home" asp-action="Contact">Contact Us</a></li>
+                                    <li class="@ViewData["Registration"]"><a class="text-dark" asp-controller="Home" asp-action="Registration">Sign In</a></li>
+                                }
+
+                                
+                            </ul>
+                        </nav>
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header>

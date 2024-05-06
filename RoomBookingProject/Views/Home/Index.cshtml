@@ -1,0 +1,249 @@
+﻿@model List<RoomBookingProject.Models.Blog>
+
+@{
+    ViewData["Title"] = "Home Page";
+    ViewData["Index"] = "active";
+}
+
+<head>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <!-- Hero Section Begin -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="hero-text">
+                        <h1>Hotel Oasis</h1>
+                        <p>
+                            Escape to Oasis and immerse yourself in a world<br> 
+                            of refined elegance and unparalleled comfort.</p>
+
+                        <a asp-controller="Home" asp-action="Room" class="primary-btn">Discover Now</a>
+                    </div>
+                </div>
+
+                
+                <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
+                    <div class="booking-form">
+                        <h3>Book Now</h3>
+
+                        <form asp-controller="Home" asp-action="Room" method="get">
+                            <div class="check-date">
+                                <label for="date-in">Check In:</label>
+                                <input type="text" class="date-input" id="date-in" name="checkInDate" value="@Context.Request.Query["checkInDate"]">
+                                <i class="icon_calendar"></i>
+                            </div>
+                            <div class="check-date">
+                                <label for="date-out">Check Out:</label>
+                                <input type="text" class="date-input" id="date-out" name="checkOutDate" value="@Context.Request.Query["checkOutDate"]">
+                                <i class="icon_calendar"></i>
+                            </div>
+                            <div class="select-option">
+                                <label for="guest">Guests:</label>
+                                <select id="guest" name="guests">
+                                    <option value="1">1 Adult</option>
+                                    <option value="2">2 Adults</option>
+                                    <option value="4">4 Adults</option>
+                                </select>
+                            </div>
+                            <button type="submit" onclick="return validateDates()">Check Availability</button>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="hero-slider owl-carousel">
+            <div class="hs-item set-bg" data-setbg="img/hero/hero-1.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="img/hero/hero-2.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="img/hero/hero-3.jpg"></div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- About Us Section Begin -->
+    <section class="aboutus-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-text">
+                        <div class="section-title">
+                            <span>About Us
+                               </span>
+                            <h2>Hotel Oasis</h2>
+                        </div>
+                        <p class="f-para">
+                            Oasis Hotel sits near the ocean, giving you a serene backdrop to unwind view. </br>
+                            We go above and beyond to make your stay enjoyable by offering supreme services.
+                        </p>
+                        <p class="s-para">
+                            Located by the ocean, Oasis Hotel offers a peaceful setting for relaxation.</br> 
+                            With our exceptional service and amenities, your stay is guaranteed to be </br> comfortable and enjoyable.
+                        </p>
+                        <a asp-controller="Home" asp-action="About" class="primary-btn about-btn">Read More</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-pic">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <img src="img/about/about-1.jpg" width="150" height="250">
+                                </br>
+                                </br>
+       
+                                <img src="img/about/about-3.jpg" width="150" height="250">
+                                
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="img/about/about-2.jpg" width="300" height="524">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Us Section End -->
+
+
+    <!-- Services Section End -->
+    <section class="services-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>What We Do</span>
+                        <h2>Discover Our Services</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="service-item">
+                        <i class="flaticon-036-parking"></i>
+                        <h4>Unique location</h4>
+                        <p>
+                         The uniqueness of Oasis hotel lies in its unparalleled location nestled by the ocean, 
+                         providing guests with breathtaking views and an unparalleled coastal experience.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="service-item">
+                        <i class="flaticon-033-dinner"></i>
+                        <h4>Restaurants</h4>
+                        <p>
+                            Oasis restaurants offer unforgettable culinary excellence, 
+                            ensuring unforgettable dining experiences for every event.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-6">
+                    <div class="service-item">
+                        <i class="flaticon-024-towel"></i>
+                        <h4>Laundry</h4>
+                        <p>
+                            Oasis' laundry service ensures guests enjoy and comfortable stay by providing meticulous care.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-6">
+                    <div class="service-item">
+                        <i class="flaticon-044-clock-1"></i>
+                        <h4>Hotel</h4>
+                        <p>
+                            Experience unparalleled hospitality with our dedicated team available round-the-clock to cater to your every need during your stay at our hotel.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="service-item">
+                        <i class="flaticon-012-cocktail"></i>
+                        <h4>Bar & Drink</h4>
+                        <p>
+                            At Oasis, the bar serves up a delightful array of refreshing drinks, 
+                            crafted with care and featuring a mix of classic favorites and innovative concoctions to suit every taste.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="service-item">
+                        <i class="flaticon-026-bed"></i>
+                        <h4>Rooms</h4>
+                        <p>
+                            Each room at Oasis is designed to provide comfort and relaxation, 
+                            offering stylish decor to ensure a memorable stay for guests.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Services Section End -->
+
+
+    <!-- Blog Section Begin -->
+    <section class="blog-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>Hotel News</span>
+                        <h2>Our News and Events</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                 
+                @foreach (var blog in Model)
+            {
+
+                        <div class="col-lg-4">
+                        <div class="blog-item set-bg" data-setbg="img/blog/@blog.Img">
+                                <div class="bi-text">
+                                    <span class="b-tag">Event</span>
+                                    <h4 class="text-light">@blog.Description</h4>
+                                @{
+                                    System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-US");
+                                }
+                                <div class="b-time"><i class="icon_clock_alt"></i> @blog.CreateDate.ToString("dd MMM, yyyy", culture)</div>
+                                </div>
+                            </div>
+                        </div>
+             }
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+</body>
+</html>
+
+<script>
+    function validateDates() {
+        var checkInDate = new Date(document.getElementById("date-in").value);
+        var checkOutDate = new Date(document.getElementById("date-out").value);
+
+        if (checkOutDate < checkInDate) {
+            alert("Check-out date cannot be before check-in date.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+
+
+

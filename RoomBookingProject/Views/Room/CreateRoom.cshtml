@@ -1,0 +1,82 @@
+﻿@model RoomBookingProject.Models.Room
+
+@{
+    ViewData["Title"] = "Create Room";
+    ViewData["AdminPanel"] = "active";
+}
+
+<body class="page-background">
+
+    <!-- Breadcrumb Section Begin -->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>Create Room</h2>
+                        <div class="bt-option">
+                            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <span>Create Room</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section End -->
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form asp-action="CreateRoom" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <strong><label asp-for="RoomType"></label></strong>
+                    <input asp-for="RoomType" class="form-control" placeholder="Enter room type" />
+                    <span asp-validation-for="RoomType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <strong>
+                        <label asp-for="Capacity"></label>
+                    </strong>
+                    <input asp-for="Capacity" class="form-control" placeholder="Enter room capacity" />
+                    <span asp-validation-for="Capacity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <strong>
+                        <label asp-for="PricePerNight"></label>
+                    </strong>
+                    <input asp-for="PricePerNight" class="form-control" placeholder="Enter price per night" />
+                    <span asp-validation-for="PricePerNight" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <strong>
+                        <label asp-for="Description"></label>
+                    </strong>
+                    <input asp-for="Description" class="form-control" placeholder="Enter description" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <strong><label asp-for="Img"></label></strong>
+                    <input type="file" name="ImgFile" class="form-control-file" accept="image/*">
+                    <span asp-validation-for="Img" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <strong>
+                        <label asp-for="Img"></label>
+                    </strong>
+                    <input asp-for="Img" class="form-control" placeholder="Enter image name (example: room-1.jpg or room-1.png, etc.)" />
+                    <span asp-validation-for="Img" class="text-danger"></span>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a asp-action="ViewRoom" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+            </br>
+            </br>
+        </div>
+    </div>
+</body>

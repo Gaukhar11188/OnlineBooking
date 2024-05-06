@@ -1,0 +1,73 @@
+﻿@model List<RoomBookingProject.Models.Booking>
+
+@{
+    ViewData["Title"] = "Booking list";
+    ViewData["AdminPanel"] = "active";
+}
+
+<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Booking List</h2>
+                    <div class="bt-option">
+                        <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <span>Booking List</span>
+                    </div>
+                    </br>
+
+                    <a href="@Url.Action("CreateBooking", "Booking")" class="btn btn-primary">Create Booking</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section End -->
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="theader">Booking Id</th>
+                            <th class="theader">Room</th>
+                            <th class="theader">Customer</thc>
+                            <th class="theader">CheckInDate</th>
+                            <th class="theader">CheckOutDate</th>
+                            <th class="theader">Status</th>
+                            <th class="theader">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var booking in Model)
+                        {
+                            <tr>
+                                <td class="theader">@booking.BookingId</td>
+                                <td class="theader">@booking.Room.RoomType</td>
+                                <td class="theader">@booking.Customer.Name</td>
+                                <td class="theader">@booking.CheckInDate</td>
+                                <td class="theader">@booking.CheckOutDate</td>
+                                <td class="theader">@booking.Status</td>
+                                <td class="theader">
+                                    <div class="btn-group" role="group">
+                                        <a href="@Url.Action("EditBooking", "Booking", new { id = booking.BookingId })" class="btn btn-secondary">Edit</a>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <form asp-controller="Booking" asp-action="Delete" method="post" class="d-inline">
+                                            <input type="hidden" name="id" value="@booking.BookingId" />
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this booking?')">Delete</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
